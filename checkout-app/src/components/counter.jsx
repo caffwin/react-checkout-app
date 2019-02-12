@@ -4,7 +4,8 @@ import React, { Component } from "react"; // imrc + tab
 class Counter extends Component {
   state = {
     // set this to an object, any data this object needs
-    count: 0
+    count: 0,
+    tags: ["tag1", "tag2", "tag3"]
     // imageUrl: "https://picsum.photos/200"
   };
 
@@ -24,6 +25,11 @@ class Counter extends Component {
         {/* <img src={this.state.imageUrl} alt="" /> */}
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button className="btn btn-secondary btn-sm">Increment</button>
+        <ul>
+          {this.state.tags.map(tag => (
+            <li key={tag}>{tag}</li>
+          ))}
+        </ul>
       </div>
     ); // This is a JSX expression - not a str
   }
@@ -52,3 +58,14 @@ export default Counter;
 
 // react Fragment to get rid of unnecessary divs
 // multicursor editing command + d to find another occurrence of selection
+
+// Dynamic rendering is done using curly braces
+
+// { this.state.tags.map(tag => <li></li>) }
+// Getting a string (tag) and mapping it to a jsx expression (<li></li>)
+// This gets compiled to a React element (a plain js object)
+// tl;dr Taking a string and mapping it to a plain js object
+
+// Any time map method is used to render list of items,
+// set key attribute in <li>
+// <li key = {tag.id}></li>
