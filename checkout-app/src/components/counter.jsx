@@ -1,53 +1,34 @@
 import React, { Component } from "react"; // imrc + tab
-
 // cc + tab
 class Counter extends Component {
   state = {
-    count: 0,
-    tags: ["tag1", "tag2", "tag3"]
+    count: 0
   };
 
-  // constructor() {
-  //   super();
-  //   // console.log("Constructor", this);
-  //   this.handleIncrement = this.handleIncrement.bind(this); // necessary for each event handler
-  // }
-
-  renderTags() {
-    if (this.state.tags.length === 0) return <p>There are no tags!</p>;
-
-    return (
-      <ul>
-        {this.state.tags.map(tag => (
-          <li key={tag}>{tag}</li>
-        ))}
-      </ul>
-    );
-  }
-
-  handleIncrement = () => {
-    // changed to arrow function, cleaner and simpler than constructor
-    console.log("Increment Clicked", this);
+  handleIncrement = product => {
+    console.log(product);
+    // this.state.count++;
+    this.setState({ count: this.state.count + 1 }); // properties here will be merged with state obj
   };
 
   render() {
+    const product = { id: 1 };
     return (
       <div>
-        <span className={this.getBadgeClasses()}>this.formatCount()}</span>
+        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={this.handleIncrement}
+          onClick={() => this.handleIncrement(product)}
           className="btn btn-secondary btn-sm"
         >
           Increment
         </button>
-        {/* {this.state.tags.length === 0 && "Please create a new tag"} */}
-
-        {/* {this.renderTags()} */}
       </div>
     ); // This is a JSX expression - not a str
-    // Logic: if this array has at least one element, render array in list
-    // Otherwise, display message
-    // No if/else like jsx.. so go back to plain js
+  }
+
+  formatCount() {
+    const { count } = this.state;
+    return count === 0 ? "Zero" : count;
   }
 
   getBadgeClasses() {
@@ -86,3 +67,7 @@ export default Counter;
 // Any time map method is used to render list of items,
 // set key attribute in <li>
 // <li key = {tag.id}></li>
+
+// virtual dom is a tree of three elements: div and two children, span and button
+
+// passing event arguments, composing components
