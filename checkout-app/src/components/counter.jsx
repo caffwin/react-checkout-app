@@ -3,35 +3,51 @@ import React, { Component } from "react"; // imrc + tab
 // cc + tab
 class Counter extends Component {
   state = {
-    // set this to an object, any data this object needs
     count: 0,
     tags: ["tag1", "tag2", "tag3"]
-    // imageUrl: "https://picsum.photos/200"
   };
 
-  // styles = {
-  //   fontSize: 20,
-  //   fontWeight: "bold"
-  // };
+  // constructor() {
+  //   super();
+  //   // console.log("Constructor", this);
+  //   this.handleIncrement = this.handleIncrement.bind(this); // necessary for each event handler
+  // }
 
-  render() {
-    // React.createElement("div");
-    // start with primary badge you want in all cases
-    // let classes = "badge m-2"
-    // classes += (this.state.count === 0) ? "badge-warning" : "badge-primary";
+  renderTags() {
+    if (this.state.tags.length === 0) return <p>There are no tags!</p>;
 
     return (
+      <ul>
+        {this.state.tags.map(tag => (
+          <li key={tag}>{tag}</li>
+        ))}
+      </ul>
+    );
+  }
+
+  handleIncrement = () => {
+    // changed to arrow function, cleaner and simpler than constructor
+    console.log("Increment Clicked", this);
+  };
+
+  render() {
+    return (
       <div>
-        {/* <img src={this.state.imageUrl} alt="" /> */}
-        <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
-        <button className="btn btn-secondary btn-sm">Increment</button>
-        <ul>
-          {this.state.tags.map(tag => (
-            <li key={tag}>{tag}</li>
-          ))}
-        </ul>
+        <span className={this.getBadgeClasses()}>this.formatCount()}</span>
+        <button
+          onClick={this.handleIncrement}
+          className="btn btn-secondary btn-sm"
+        >
+          Increment
+        </button>
+        {/* {this.state.tags.length === 0 && "Please create a new tag"} */}
+
+        {/* {this.renderTags()} */}
       </div>
     ); // This is a JSX expression - not a str
+    // Logic: if this array has at least one element, render array in list
+    // Otherwise, display message
+    // No if/else like jsx.. so go back to plain js
   }
 
   getBadgeClasses() {
@@ -39,19 +55,20 @@ class Counter extends Component {
     classes += this.state.count === 0 ? "warning" : "primary";
     return classes;
   }
-
-  formatCount() {
-    const { count } = this.state; // picking count property of obj and storing it in separate var {count}
-    // check value of count property, return 0 if 0, otherwise return count
-    // return this.state.count === 0 ? 'Zero' : this.state.count;
-    return count === 0 ? "Zero" : count;
-    // return count === 0 ? <h1>Zero</h1> : count;
-    // object destructuring (this.state) and peek count property
-    // We can also return a jsx expression
-    // JSX exps are just like normal js objs - can be returned, passed to function,
-    // used as value of constant or variable, etc.
-  }
 }
+
+// {this.state.tags.length === 0 && "Please create a new tag"}
+// First value is boolean (result), second value is string
+// && can be applied between boolean & non boolean values
+// true & false > false
+// true && "hi" > "hi"
+// js tries to convert 'hi' in to truthy or falsey
+// empty string = falsey, string with at least 1 char = truthey
+// both true, so returns second operand (last one)
+// Similarly..
+// true && "hi" && 1 > 1
+// true, truthey, and truthey because not zero
+// Returns last operand (1)
 
 // JSX elements must have one parent element
 export default Counter;
