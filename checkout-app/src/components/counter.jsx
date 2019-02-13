@@ -1,21 +1,13 @@
 import React, { Component } from "react"; // imrc + tab
 // cc + tab
 class Counter extends Component {
-  state = {
-    value: this.props.counter.value
-  };
-
-  handleIncrement = product => {
-    this.setState({ value: this.state.value + 1 }); // properties here will be merged with state obj
-  };
-
   render() {
     const product = { id: 1 };
     return (
       <div>
         <span className={this.getBadgeClasses()}>{this.formatCount()}</span>
         <button
-          onClick={() => this.handleIncrement(product)}
+          onClick={() => this.props.onIncrement(this.props.counter)}
           className="btn btn-secondary btn-sm"
         >
           Increment
@@ -32,13 +24,13 @@ class Counter extends Component {
   }
 
   formatCount() {
-    const { value } = this.state;
+    const { value } = this.props.counter;
     return value === 0 ? "Zero" : value;
   }
 
   getBadgeClasses() {
     let classes = "badge m-2 badge-";
-    classes += this.state.value === 0 ? "warning" : "primary";
+    classes += this.props.counter.value === 0 ? "warning" : "primary";
     return classes;
   }
 }
