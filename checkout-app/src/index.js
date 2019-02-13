@@ -2,10 +2,9 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import * as serviceWorker from "./serviceWorker";
+// import registerServiceWorker from "./registerServiceWorker";
 import "bootstrap/dist/css/bootstrap.css";
 // import Counter from "./components/counter";
-import Counters from "./components/counters";
 
 // const element = <h1>Hello World</h1>;
 // ReactDOM.render(<App />, document.getElementById('root'));
@@ -15,4 +14,6 @@ import Counters from "./components/counters";
 // Learn more about service workers: http://bit.ly/CRA-PWA
 // serviceWorker.unregister();
 
-ReactDOM.render(<Counters />, document.getElementById("root"));
+ReactDOM.render(<App />, document.getElementById("root"));
+
+// registerServiceWorker();
