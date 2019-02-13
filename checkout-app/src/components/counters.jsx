@@ -11,11 +11,26 @@ class Counters extends Component {
       { id: 4, value: 0 }
     ]
   };
+
+  // counterId helps us know which counter to rmeove from above list of counters
+  handleDelete = counterId => {
+    // console.log("Event Handler Called", counterId);
+    const counters = this.state.counters.filter(c => c.id !== counterId);
+    // filter() gives all counters except the one with the given id
+    // this.setState({ counters: counters }); Simplifies because key/value are same to..
+    this.setState({ counters });
+    // overwrite counters property with counters constant
+  };
+
   render() {
     return (
       <div>
         {this.state.counters.map(counter => (
-          <Counter key={counter.id} value={counter.value} id={counter.id} />
+          <Counter
+            key={counter.id}
+            onDelete={this.handleDelete}
+            counter={counter}
+          />
         ))}
       </div>
     );
@@ -23,10 +38,3 @@ class Counters extends Component {
 }
 
 export default Counters;
-
-// passing data to components, passing children
-// map() creates new array with each result of function call as an element
-
-// <Counter key={counter.id} value={counter.value}/>
-// These attributes are passed to component using single js obj 'props
-// 'key' and 'value'
