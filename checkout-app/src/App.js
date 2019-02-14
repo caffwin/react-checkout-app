@@ -14,6 +14,26 @@ class App extends Component {
     ]
   };
 
+  // App - Constructor, App - Rendered, App - Mounted ** In this order!! **
+
+  constructor() {
+    super();
+    console.log("App - Constructor", this.props); // only called once when instance of class is created
+  }
+
+  // constructor (props) {
+  // super(props);
+  //   console.log('App - Constructor'); // only called once when instance of class is created
+  //   this.state = this.props.method;
+  //   // props must be passed as an argument or this.props.method will be undefined
+  // }
+
+  componentDidMount() {
+    // Make Ajax calls to get data from server
+    console.log("App - Mounted");
+    // Mounted means in the DOM
+  }
+
   handleIncrement = counter => {
     const counters = [...this.state.counters];
     const index = counters.indexOf(counter);
@@ -42,6 +62,9 @@ class App extends Component {
   };
 
   render() {
+    console.log("App - Rendered");
+    // returns a React element that represents virtual DOM
+    // When a component is rendered, its children are rendered recursively
     return (
       <React.Fragment>
         <NavBar
